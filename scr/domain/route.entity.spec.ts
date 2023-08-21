@@ -1,4 +1,4 @@
-import { Route, RouteProps } from "./route.entity";
+import { Position, Route, RouteProps } from "./route.entity";
 
 describe("Route test", () => {
   test("constructor", () => {
@@ -86,5 +86,34 @@ describe("Route test", () => {
     route.updatePosition(startPosition, endPosition);
     expect(route.startPosition).toBe(startPosition);
     expect(route.endPosition).toBe(endPosition);
+  });
+
+  test("Update Points", () => {
+    let routeProps: RouteProps = {
+      title: "Rota",
+      startPosition: {
+        latitude: 0,
+        longitude: 0,
+      },
+      endPosition: {
+        latitude: 0,
+        longitude: 0,
+      },
+    };
+    let route = new Route(routeProps);
+
+    const points: Position[] = [
+      {
+        latitude: 10,
+        longitude: 10,
+      },
+      {
+        latitude: 20,
+        longitude: 20,
+      },
+    ];
+    route.updatePoints(points);
+    expect(route.points).toStrictEqual(points);
+    expect(route.points).toHaveLength(2);
   });
 });

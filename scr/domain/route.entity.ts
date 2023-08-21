@@ -14,6 +14,20 @@ export class Route {
   constructor(props: RouteProps) {
     this.props = { ...props, points: props.points || [] };
   }
+
+  updatePoints = (points: Position[]) => {
+    this.points = points;
+  };
+
+  updateTitle = (title: string) => {
+    this.title = title;
+  };
+
+  updatePosition(startPosition: Position, endPosition: Position) {
+    this.startPosition = startPosition;
+    this.endPosition = endPosition;
+  }
+
   get title() {
     return this.props.title;
   }
@@ -42,12 +56,11 @@ export class Route {
     this.props.endPosition = endPosition;
   }
 
-  updateTitle = (title: string) => {
-    this.title = title;
-  };
+  private set points(points: Position[]) {
+    this.props.points = points;
+  }
 
-  updatePosition(startPosition: Position, endPosition: Position) {
-    this.startPosition = startPosition;
-    this.endPosition = endPosition;
+  toJSON() {
+    return this.props;
   }
 }
