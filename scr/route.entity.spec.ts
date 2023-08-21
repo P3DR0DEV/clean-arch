@@ -61,4 +61,30 @@ describe("Route test", () => {
     route.updateTitle("Nova Rota");
     expect(route.title).toBe("Nova Rota");
   });
+
+  test("Update Position", () => {
+    let routeProps: RouteProps = {
+      title: "Rota",
+      startPosition: {
+        latitude: 0,
+        longitude: 0,
+      },
+      endPosition: {
+        latitude: 0,
+        longitude: 0,
+      },
+    };
+    let route = new Route(routeProps);
+    const startPosition = {
+      latitude: 10,
+      longitude: 10,
+    };
+    const endPosition = {
+      latitude: 20,
+      longitude: 20,
+    };
+    route.updatePosition(startPosition, endPosition);
+    expect(route.startPosition).toBe(startPosition);
+    expect(route.endPosition).toBe(endPosition);
+  });
 });
