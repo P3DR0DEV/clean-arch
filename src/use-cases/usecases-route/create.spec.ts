@@ -1,8 +1,8 @@
-import { RouteInMemoryRepository } from "../infra/in-memory/route-in-memory.repository";
-import { CreateRouteUseCase } from "./create-route.use-case";
+import { RouteInMemoryRepository } from "@/infra/in-memory/route-in-memory.repository";
+import { CreateRouteUseCase } from "./create";
 
-describe(`Create UseCase Route`, () => {
-  it(`should create a route`, async () => {
+describe("Create UseCase Route", () => {
+  it("should create a route", async () => {
     const routeRepository = new RouteInMemoryRepository();
     const createRouteUseCase = new CreateRouteUseCase(routeRepository);
 
@@ -18,7 +18,7 @@ describe(`Create UseCase Route`, () => {
       },
     });
 
-    expect(output).toStrictEqual({
+    expect(output).toMatchObject({
       title: "Rota",
       startPosition: {
         latitude: 0,
