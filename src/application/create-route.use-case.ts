@@ -1,5 +1,5 @@
 import { Position, Route } from "../domain/route.entity";
-import { RouteRepositoryInterface } from "../domain/route.repository";
+import { RouteRepositoryInterface } from "../domain/repositories/route.repository";
 
 interface CreateRouteInput {
   title: string;
