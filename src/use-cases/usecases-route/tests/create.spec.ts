@@ -1,9 +1,8 @@
 import { RouteInMemoryRepository } from "@/infra/in-memory/route-in-memory.repository";
-import { CreateRouteUseCase } from "./create";
-import { FetchRouteByIdUseCase } from "./fetch-by-id";
+import { CreateRouteUseCase } from "../create";
 
-describe("Fetch by id UseCase Route", () => {
-  it("should return a single route", async () => {
+describe("Create UseCase Route", () => {
+  it("should create a route", async () => {
     const routeRepository = new RouteInMemoryRepository();
     const createRouteUseCase = new CreateRouteUseCase(routeRepository);
 
@@ -19,10 +18,18 @@ describe("Fetch by id UseCase Route", () => {
       },
     });
 
-    const fetchRouteByIdUseCase = new FetchRouteByIdUseCase(routeRepository);
-
-    const route = await fetchRouteByIdUseCase.execute(output.id);
-
-    expect(route).toMatchObject(output);
+    expect(output).toMatchObject({
+      title: "Rota",
+      startPosition: {
+        latitude: 0,
+        longitude: 0,
+      },
+      endPosition: {
+        latitude: 0,
+        longitude: 0,
+      },
+      points: [],
+    });
+    expect(routeRepository.items).toHaveLength(1);
   });
 });

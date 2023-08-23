@@ -1,11 +1,12 @@
 import { RouteInMemoryRepository } from "@/infra/in-memory/route-in-memory.repository";
-import { FetchAllRouteUseCase } from "./fetch-all";
-import { CreateRouteUseCase } from "./create";
+import { CreateRouteUseCase } from "../create";
+import { FetchRouteByIdUseCase } from "../fetch-by-id";
 
-describe("Fetch all UseCase Route", () => {
-  it("should return all routes", async () => {
+describe("Fetch by id UseCase Route", () => {
+  it("should return a single route", async () => {
     const routeRepository = new RouteInMemoryRepository();
     const createRouteUseCase = new CreateRouteUseCase(routeRepository);
+
     const output = await createRouteUseCase.execute({
       title: "Rota",
       startPosition: {
@@ -17,9 +18,11 @@ describe("Fetch all UseCase Route", () => {
         longitude: 0,
       },
     });
-    const findAllRouteUseCase = new FetchAllRouteUseCase(routeRepository);
-    const routes = await findAllRouteUseCase.execute();
 
-    expect(routes).toHaveLength(1);
+    const fetchRouteByIdUseCase = new FetchRouteByIdUseCase(routeRepository);
+
+    const route = await fetchRouteByIdUseCase.execute(output.id);
+
+    expect(route).toMatchObject(output);
   });
 });

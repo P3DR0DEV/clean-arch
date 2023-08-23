@@ -1,7 +1,7 @@
 import { RouteInMemoryRepository } from "@/infra/in-memory/route-in-memory.repository";
-import { CreateRouteUseCase } from "./create";
-import { DeleteRouteUseCase } from "./delete";
-import { FetchAllRouteUseCase } from "./fetch-all";
+import { CreateRouteUseCase } from "../create";
+import { DeleteRouteUseCase } from "../delete";
+import { FetchAllRouteUseCase } from "../fetch-all";
 
 describe("DeleteRouteUseCase", () => {
   it("should delete a route", async () => {
