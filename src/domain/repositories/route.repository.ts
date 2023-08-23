@@ -5,4 +5,5 @@ export interface RouteRepositoryInterface {
   findAll(): Promise<Route[]>;
   findById(id: string): Promise<Route | undefined>;
   delete(id: string): Promise<void>;
+  update(id: string, route: Route): Promise<Route>;
 }
