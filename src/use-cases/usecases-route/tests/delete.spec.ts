@@ -22,15 +22,16 @@ describe("DeleteRouteUseCase", () => {
       });
     }
 
-    const output = await new FetchAllRouteUseCase(routeRepository);
+    const output = new FetchAllRouteUseCase(routeRepository);
     const receivedRoutes = await output.execute();
 
     expect(receivedRoutes).toHaveLength(3);
 
-    const elementToDelete = receivedRoutes[0].id;
+    const elementToDelete = receivedRoutes[0];
     const deleteRouteUseCase = new DeleteRouteUseCase(routeRepository);
 
-    await deleteRouteUseCase.execute(elementToDelete);
+    const deletedRoute = await deleteRouteUseCase.execute(elementToDelete.id);
+    expect(deletedRoute).toMatchObject(elementToDelete);
     const receivedRoutesAfterDelete = await output.execute();
     expect(receivedRoutesAfterDelete).toHaveLength(2);
   });

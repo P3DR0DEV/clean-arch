@@ -16,8 +16,11 @@ export class RouteInMemoryRepository implements RouteRepositoryInterface {
     return this.items.find((route) => route.id === id);
   }
 
-  async delete(id: string): Promise<void> {
-    this.items = this.items.filter((route) => route.id !== id);
+  async delete(id: string): Promise<Route | undefined> {
+    const itemToBeDeleted = this.items.find((route) => route.id === id);
+    const newItems = this.items.filter((route) => route.id !== id);
+    this.items = newItems;
+    return itemToBeDeleted;
   }
 
   async update(id: string, route: Route): Promise<Route> {
